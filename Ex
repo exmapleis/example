@@ -1,466 +1,549 @@
-program - 1
+PROGRAM 1
 
-import java.util.Scanner;
-public class  stringfunction{
-  public static void main(String []args)
-  {
-    Scanner sc = new Scanner(System.in); 
-    System.out.print("Input a first string ");
-      String s1 = sc.nextLine();
-    System.out.print("Input second string ");
-      String s2 = sc.nextLine();
-    boolean x=s1.equals(s2);
-    System.out.println("Compare s1 and s2:"+x);
-    System.out.println("Character at given position is:"+s1.charAt(5));
-    System.out.println(s1.concat(" the author"));
-    System.out.println(s1.length());
-    System.out.println(s1.toLowerCase());
-    System.out.println(s1.toUpperCase());
-    System.out.println(s1.indexOf('a'));
-    System.out.println(s1.substring(0,4));
-    System.out.println(s1.substring(4));  
+ index.html
+<!DOCTYPE html>
+<html>
+<body>
+<form action="welcome.php" method="post">
+Name: <input type="text" name="uname"><br><br>
+Age: <input type="number" name="age"><br><br>
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
+welcome.php
+<?php
+$name = $_POST['uname'];
+$age = $_POST['age'];
+echo "Hello $name! You are $age years old.";
+?>
+
+
+PROGRAM 2
+
+<?php
+function gcd($a, $b) {
+    while($b != 0) {
+        $temp = $b;
+        $b = $a % $b;
+        $a = $temp;
+    }
+    return $a;
+}
+
+$num1 = 24;
+$num2 = 36;
+
+echo "GCD of $num1 and $num2 is: " . gcd($num1, $num2);
+?>
+
+
+PROGRAM 3
+
+
+<?php
+$numbers = array(10, 45, 78, 23, 5, 67, 90, 12, 32, 50);
+
+$maxValue = max($numbers);
+$minValue = min($numbers);
+
+echo "Maximum Value: $maxValue <br>";
+echo "Minimum Value: $minValue";
+?>
+
+
+
+PROGRAM  4
+
+<?php
+// Sample string
+$str = "Hello PHP World";
+
+// String length
+echo "Original String: $str<br>";
+echo "Length of string: " . strlen($str) . "<br>";
+
+// Reverse string
+echo "Reversed string: " . strrev($str) . "<br>";
+
+// Convert to uppercase
+echo "Uppercase: " . strtoupper($str) . "<br>";
+
+// Convert to lowercase
+echo "Lowercase: " . strtolower($str) . "<br>";
+
+// Extract a substring
+echo "Substring (0,5): " . substr($str, 0, 5) . "<br>";
+
+// Find position of 'PHP'
+echo "Position of 'PHP': " . strpos($str, "PHP") . "<br>";
+?>
+
+
+PROGRAM 5
+
+<?php
+    // Demonstration of While Loop
+    echo "<h3>While Loop</h3>";
+    $i = 1;
+    while ($i <= 5) {
+        echo "Number: $i <br>";
+        $i++;
+    }
+
+    // Demonstration of Do-While Loop
+    echo "<h3>Do-While Loop</h3>";
+    $j = 1;
+    do {
+        echo "Number: $j <br>";
+        $j++;
+    } while ($j <= 5);
+?>
+
+
+PROGRAM - 6
+
+<?php
+try {
+    $filename = "data.txt";
+
+    if (!file_exists($filename)) {
+        throw new Exception("File not found");
+    }
+
+    echo "File opened successfully";
+}
+catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
+
+
+PROGRAM - 7
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Age Calculator</title>
+</head>
+<body>
+
+<h2>Age Calculator</h2>
+
+<form method="post">
+    Enter Date of Birth:
+    <input type="date" name="dob" required>
+    <br><br>
+    <input type="submit" name="submit" value="Calculate Age">
+</form>
+
+<?php
+if (isset($_POST['submit'])) {
+    $dob = $_POST['dob'];
+    $dobDate = new DateTime($dob);
+    $today = new DateTime(date("Y-m-d"));
+    $age = $today->diff($dobDate);
+
+    echo "<h3>Your Age is: " . $age->y . " years</h3>";
+}
+?>
+</body>
+</html>
+
+
+PROGRAM - 8
+
+<?php
+$file = "sample.txt";
+
+if (file_exists($file)) {
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+    header('Content-Length: ' . filesize($file));
+    readfile($file);
+    exit;
+} else {
+    echo "File not found!";
+}
+?>
+
+
+PROGRAM - 9
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 9 - File Handling</title>
+</head>
+<body>
+    <h2>Add and Display Names</h2>
+
+    <form method="post">
+        Enter Name: <input type="text" name="username" required>
+        <input type="submit" name="submit" value="Add Name">
+    </form>
+
+    <hr>
+
+    <?php
+    $filename = "names.txt";
+
+    // If form is submitted
+    if (isset($_POST['submit'])) {
+        $name = $_POST['username'];
+
+        // Open file in append mode
+        $file = fopen($filename, "a");
+        fwrite($file, $name . "\n");
+        fclose($file);
+
+        echo "<p><b>Name added successfully!</b></p>";
+    }
+
+    // Display all names
+    if (file_exists($filename)) {
+        echo "<h3>List of Names:</h3>";
+        $file = fopen($filename, "r");
+        while (!feof($file)) {
+            echo fgets($file) . "<br>";
+        }
+        fclose($file);
+    }
+    ?>
+
+</body>
+</html>
+
+
+PROGRAM - 10
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Program 10-Form Controls</title>
+<script>
+function showMessage(){
+alert("Form submitted sucessfully!");
+}
+</script>
+</head>
+<body>
+<h2>User Registration Form</h2>
+<form onsubmit="showMessage()">
+<label>Name:</label>
+<input type="text"name="name"><br><br>
+<label>Gender:</label>
+<input type="radio"name="gender"value="Male">Male
+<input type="radio"name="gender"value="Female">Female<br><br>
+<label>Hobbies:</label>
+<input type="checkbox"name="hobby1"value="Reading">Reading
+<input type="checkbox"name="hobby2"value="Music">Music
+<input type="checkbox"name="hobby3"value="Sports">Sports<br><br>
+<input type="submit"value="Submit">
+<input type="reset"value="Reset">
+</form>
+</body>
+</html>
+
+
+PROGRAM -11
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration Form</title>
+<script>
+function validateForm() {
+  let name = document.forms["regForm"]["name"].value;
+  let email = document.forms["regForm"]["email"].value;
+  let phone = document.forms["regForm"]["phone"].value;
+ if (name == "") {
+    alert("Name must be filled out");
+    return false;
   }
+ if (!email.includes("@")) {
+    alert("Invalid email");
+    return false;
+  }
+ if (phone.length != 10) {
+    alert("Phone must be 10 digits");
+    return false;
+  }
+ document.getElementById("successMsg").innerHTML =
+    "Form registered successfully!";
+ document.getElementById("successMsg").style.color = "green";
+ document.forms["regForm"].reset();
+  return false;
 }
+</script>
+</head>
+<body>
+<form name="regForm" onsubmit="return validateForm()">
+  Name: <input type="text" name="name"><br>
+  Email: <input type="email" name="email"><br>
+  Password: <input type="password" name="password"><br>
+  Phone: <input type="text" name="phone"><br>
+  <input type="submit" value="Register">
+</form>
+<p id="successMsg"></p>
+</body>
+</html>
 
 
-program - 2
+PROGRAM - 12
 
-class student 
-{
-    String name;
-    String dept;
-    int age;
-    public student(String name, String dept, int age) 
-{
-        this.name = name;
-        this.dept = dept;
-        this.age = age;
-    }
-    public void displayDetails() 
-{
-        System.out.println("Name: " + name);
-        System.out.println("Department: " + dept);
-        System.out.println("Age: " + age);
-    }
-    public void greetings() {
-        System.out.println(" Hello " + name );
-    }}
-public class Main {
-    public static void main(String[ ] args) 
-{
-        student  stu1 = new student("ravi”,"cs",101);
-        student stu2 = new  student("ram","IT", 102);
-System.out.println("\n Details of Student 1:");
-        stu1.displayDetails();
-        stu1.greetings();
-
-        System.out.println("\n Details of Student 2:");
-        stu2.displayDetails();
-        stu2.greetings();
-    }
-}
-
-
-program - 3
-
-public class Calculator 
-{
-    public Calculator() 
-{
-        System.out.println("Default Calculator created.");
-    }
-    public Calculator(String type) 
-    {
-        System.out.println(type + " Calculator created.");
-    }
-    public Calculator(String type, int version) 
-{
-        System.out.println(type + " Calculator version " + version + " created.");
-    }
-
-    public int add(int a, int b) 
-    {
-        System.out.println("Adding two integers:");
-        return a + b;
-    }
-    public int add(int a, int b, int c) 
-    {
-        System.out.println("Adding three integers:");
-        return a + b + c;
-    }
-
-    public static void main(String[] args) 
-   {
-    System.out.println("\n--- Demonstrating Constructor Overloading ---");
-    System.out.println("\n=======================================");
-        Calculator calc1 = new Calculator(); 
-        Calculator calc2 = new Calculator("Scientific"); 
-        Calculator calc3 = new Calculator("Financial", 2); 
-
-        System.out.println("\n--- Demonstrating Method Overloading ---");
-       System.out.println("\n=======================================");
-        Calculator  arith = new Calculator(); 
-        System.out.println("Sum of 5 and 10: " + arith.add(5, 10));
-        System.out.println("Sum of 5, 10, and 15: " + arith.add(5, 10, 15));
-        
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Last Visit Using Cookies</title>
+</head>
+<body>
+<h2>Last Visited Page and Time</h2>
+<p id="display"></p>
+<script>
+function getCookie(name) {
+    let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+if (match) {
+        return match[2];
+ } else {
+        return null;
     }
 }
-
-
-program - 4
-
-class student {
-    void display() {
-        System.out.println("BASE CLASS");
-    }
+let lastVisit = getCookie("visit");
+if (lastVisit != null) {
+    document.getElementById("display").innerHTML = 
+    "Your last visit was on: " + lastVisit;
+} else {
+    document.getElementById("display").innerHTML = 
+    "This is your first visit!";
 }
-class stud1 extends student {
-    void display() {
-        System.out.println("SINGLE INHERITANCE- WELCOME STUD1");
-    }
+let currentTime = new Date();
+document.cookie = "visit=" + currentTime + "; path=/";
+</script>
+</body>
+</html>
+
+PROGRAM - 13
+
+1. Database Table (MySQL)
+CREATE DATABASE student_db;
+
+USE student_db;
+
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    department VARCHAR(50),
+    phone VARCHAR(15)
+);
+2. Database Connection (db.php)
+<?php
+$conn = mysqli_connect("localhost", "root", "", "student_db");
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
-class stud2 extends stud1 {
-    void display() {
-        System.out.println("MULTILEVEL INHERITANCE-WELCOME STUD2");
-    }
+?>
+3. Main Page (index.php)
+<?php include 'db.php'; ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management System</title>
+</head>
+<body>
+
+<h2>Student Information Form</h2>
+
+<form method="post" action="insert.php">
+    Name: <input type="text" name="name" required><br><br>
+    Email: <input type="email" name="email" required><br><br>
+    Department: <input type="text" name="department" required><br><br>
+    Phone: <input type="text" name="phone" required><br><br>
+    <input type="submit" value="Add Student">
+</form>
+
+<h2>Student Records</h2>
+<table border="1">
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Department</th>
+    <th>Phone</th>
+    <th>Actions</th>
+</tr>
+<?php
+$result = mysqli_query($conn, "SELECT * FROM students");
+while ($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+    echo "<td>".$row['id']."</td>";
+    echo "<td>".$row['name']."</td>";
+    echo "<td>".$row['email']."</td>";
+    echo "<td>".$row['department']."</td>";
+    echo "<td>".$row['phone']."</td>";
+    echo "<td>
+        <a href='delete.php?id=".$row['id']."'>Delete</a>
+    </td>";
+    echo "</tr>";
 }
+?>
+</table>
+</body>
+</html>
 
-class stud3 extends student {
-    void display() {
-        System.out.println("HIERARCHIAL INHERITANCE-WELCOME STUD3");
-    }
+4. Insert File (insert.php)
+<?php
+include 'db.php';
+$name = $_POST['name'];
+$email = $_POST['email'];
+$department = $_POST['department'];
+$phone = $_POST['phone'];
+$sql = "INSERT INTO students(name, email, department, phone)
+        VALUES('$name', '$email', '$department', '$phone')";
+mysqli_query($conn, $sql);
+header("Location: index.php");
+?>
+5. Delete File (delete.php)
+<?php
+include 'db.php';
+$id = $_GET['id'];
+mysqli_query($conn, "DELETE FROM students WHERE id=$id");
+header("Location: index.php");
+?>
+
+
+
+PROGRAM - 14
+
+1. Database Table (MySQL)
+CREATE DATABASE payroll_db;
+USE payroll_db;
+CREATE TABLE payroll (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_name VARCHAR(100),
+    basic_salary FLOAT,
+    hra FLOAT,
+    da FLOAT,
+    deductions FLOAT,
+    gross_salary FLOAT,
+    net_salary FLOAT
+);
+
+2. Database Connection (db.php)
+<?php
+$conn = mysqli_connect("localhost", "root", "", "payroll_db");
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
-public class InheritanceDemo {
-    public static void main(String[] args) {
-        stud1 obj1 = new stud1();
-        obj1.display();  
-        stud2 obj2 = new stud2();
-        obj2.display();  
-        stud3 obj3 = new stud3();
-        obj3.display();  
-         student obj = new student();
-        obj.display();  }}
+?>
 
-
-
-program - 5
-
-// Define interface
-interface EmployeeDetails {
-    void showDetails();       // To display employee data
-    void calculateSalary();   // To calculate salary
+3. Main Page (index.php)
+<?php include 'db.php'; ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Payroll System</title>
+</head>
+<body>
+<h2>Employee Payroll Form</h2>
+<form method="post" action="calculate.php">
+    Employee Name: <input type="text" name="emp_name" required><br><br>
+    Basic Salary: <input type="number" name="basic" required><br><br>
+    HRA: <input type="number" name="hra" required><br><br>
+    DA: <input type="number" name="da" required><br><br>
+    Deductions: <input type="number" name="deductions" required><br><br>
+    <input type="submit" value="Calculate & Save">
+</form>
+<h2>Payroll Records</h2>
+<table border="1">
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Gross Salary</th>
+    <th>Net Salary</th>
+</tr>
+<?php
+$result = mysqli_query($conn, "SELECT * FROM payroll");
+while ($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+    echo "<td>".$row['id']."</td>";
+    echo "<td>".$row['emp_name']."</td>";
+    echo "<td>".$row['gross_salary']."</td>";
+    echo "<td>".$row['net_salary']."</td>";
+    echo "</tr>";
 }
+?>
+</table>
+</body>
+</html>
 
-// Implementing class
-class Employee implements EmployeeDetails {
-    String name;
-    int empId;
-    double basicSalary;
-    double hra, da, totalSalary;
+4. Salary Calculation & Insert (calculate.php)
+<?php
+include 'db.php';
+$emp_name = $_POST['emp_name'];
+$basic = $_POST['basic'];
+$hra = $_POST['hra'];
+$da = $_POST['da'];
+$deductions = $_POST['deductions'];
+$gross = $basic + $hra + $da;
+$net = $gross - $deductions;
+$sql = "INSERT INTO payroll(emp_name, basic_salary, hra, da, deductions, gross_salary, net_salary)
+        VALUES('$emp_name', '$basic', '$hra', '$da', '$deductions', '$gross', '$net')";
+mysqli_query($conn, $sql);
+header("Location: index.php");
+?>
 
-    // Constructor to initialize employee data
-    Employee(String name, int empId, double basicSalary) {
-        this.name = name;
-        this.empId = empId;
-        this.basicSalary = basicSalary;
-    }
 
-    // Method to show employee details
-    public void showDetails() {
-        System.out.println("\n--- Employee Details ---");
-        System.out.println("Employee ID   : " + empId);
-        System.out.println("Employee Name : " + name);
-        System.out.println("Basic Salary  : ₹" + basicSalary);
-    }
 
-    // Method to calculate and display salary
-    public void calculateSalary() {
-        hra = 0.20 * basicSalary;  // HRA = 20%
-        da = 0.10 * basicSalary;   // DA = 10%
-        totalSalary = basicSalary + hra + da;
+PROGRAM - 15
 
-        System.out.println("\n--- Salary Breakdown ---");
-        System.out.println("HRA (20%)     : ₹" + hra);
-        System.out.println("DA (10%)      : ₹" + da);
-        System.out.println("Total Salary  : ₹" + totalSalary);
-    }
+1. Database Table (MySQL)
+CREATE DATABASE feedback_db;
+USE feedback_db;
+CREATE TABLE feedback (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    message TEXT
+);
+2. Database Connection (db.php)
+<?php
+$conn = mysqli_connect("localhost", "root", "", "feedback_db");
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
-
-// Main class to test
-public class EmployeeInterfaceDemo {
-    public static void main(String[] args) {
-        // Create Employee object
-        Employee emp = new Employee("John Doe", 101, 30000);
-
-        // Call interface methods
-        emp.showDetails();
-        emp.calculateSalary();
-    }
-}
-
-
-
-program - 6
-
-
-class MyRunnable implements Runnable{
-
-public void run(){
-
-for(int i=1;i<=5;i++){
-
-System.out.println(Thread.currentThread().getName()+"-Value:"+i);
-
-try
-
-{
-
-Thread.sleep(500);
-
-}
-
-catch (InterruptedException e)
-
-{}
-
-This is the reason
-
-public class Runnable Example
-
-{
-
-public static void main(String[] args)
-
-{
-
-Runnable R=new MyRunnable();
-
-Thread t1=new Thread(R);
-
-Thread t2=new Thread(R);
-
-t1.start();
-
-t2.start();
-
-}
-
-}
-
-
-
-program - 7 
-
-import java.io.*;
-
-public class ExceptionDemo {
-
-public static void main(String[] args) {
-System.out.println("----- Java Exception Handling Demo	");
-
-
-// 1. NullPointerException try {
-String str = null;
-System.out.println("Length of the string: " + str.length());
-
-} catch (NullPointerException e) {
-System.out.println("Caught NullPointerException: " + e.getMessage());
-}
-
-// 2. ArithmeticException try {
-int a = 10, b = 0; int result = a / b;
-System.out.println("Result: " + result);
-} catch (ArithmeticException e) {
-System.out.println("Caught ArithmeticException: " + e.getMessage());
-}
-
-// 3. IOException try {
-BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); System.out.print("Enter your name: ");
-String name = reader.readLine(); // This may throw IOException System.out.println("Hello, " + name + "!");
-} catch (IOException e) {
-System.out.println("Caught IOException: " + e.getMessage());
-}
-
-// 4. ArrayIndexOutOfBoundsException try {
-int[] arr = {1, 2, 3};
-System.out.println("Accessing 5th element: " + arr[4]);
-} catch (ArrayIndexOutOfBoundsException e) {
-System.out.println("Caught ArrayIndexOutOfBoundsException: " + e.getMessage());
-}
-System.out.println("----- Program Execution Completed	");
-}
-}
-
-
-program - 8 (A) 
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-
-public class LoginForm extends JFrame implements ActionListener {
-    JTextField tfUsername;
-    JPasswordField pfPassword;
-    JButton btnLogin;
-
-    public LoginForm() {
-        setTitle("Login Form");
-        setSize(300, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(3, 2, 5, 5));
-
-        // Labels and Fields
-        add(new JLabel("Username:"));
-        tfUsername = new JTextField();
-        add(tfUsername);
-
-        add(new JLabel("Password:"));
-        pfPassword = new JPasswordField();
-        add(pfPassword);
-        btnLogin = new JButton("Login");
-        btnLogin.addActionListener(this);
-        add(btnLogin);
-
-        setLocationRelativeTo(null); // Center window
-        setVisible(true);
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        String username = tfUsername.getText();
-        String password = new String(pfPassword.getPassword());
-
-        // Hardcoded credentials
-        if (username.equals("admin") && password.equals("1234")) {
-            JOptionPane.showMessageDialog(this, "Login Successful!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Invalid Username or Password");
-        }
-    }
-
-    public static void main(String[] args) {
-        new LoginForm();
-    }
-}
-
-
-program - 8 (B)
-
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-
-public class ValidationForm extends JFrame implements ActionListener {
-    JTextField tfName, tfEmail;
-    JButton btnSubmit;
-
-    public ValidationForm() {
-        setTitle("Form Validation");
-        setSize(300, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(3, 2, 5, 5));
-
-        add(new JLabel("Name:"));
-        tfName = new JTextField();
-        add(tfName);
-
-        add(new JLabel("Email:"));
-        tfEmail = new JTextField();
-        add(tfEmail);
-
-        btnSubmit = new JButton("Submit");
-        btnSubmit.addActionListener(this);
-        add(btnSubmit);
-
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        String name = tfName.getText().trim();
-        String email = tfEmail.getText().trim();
-
-        if (name.isEmpty() || email.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "All fields are required!", "Validation Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "Form Submitted Successfully!");
-        }
-    }
-
-    public static void main(String[] args) {
-        new ValidationForm();
-    }
-}
-
-
-
-program - 9
-
-
-import java.util.Random;
-import java.util.Scanner;
-public class DnaSequenceGenerator {
-    // Define possible nucleotides in a DNA sequence
-private static final char[] NUCLEOTIDES = {'A', 'T', 'C', 'G'};
-    // Generate a random DNA sequence of the given length
-public static String generateDnaSequence(int length) {
-        Random random = new Random();
-        StringBuilder dna = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            char nucleotide = NUCLEOTIDES[random.nextInt(NUCLEOTIDES.length)];
-            dna.append(nucleotide);
-        }
-        return dna.toString();
-    }
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the length of the DNA sequence to generate: ");
-        int length = scanner.nextInt();
-        if (length <= 0) {
-            System.out.println("Invalid input. Please enter a positive integer.");
-        } else {
-            String dnaSequence = generateDnaSequence(length);
-            System.out.println("Generated DNA Sequence: " + dnaSequence);
-        }
-        scanner.close();
-    }
-}
-
-
-
-program - 10
-
-import java.util.Random;
-import java.util.Scanner;
-public class ProteinSequenceGenerator {
-    // 20 standard amino acids represented by their single-letter codes
-    private static final char[] AMINO_ACIDS = {
-        'A', 'R', 'N', 'D', 'C',
-        'E', 'Q', 'G', 'H', 'I',
-        'L', 'K', 'M', 'F', 'P',
-        'S', 'T', 'W', 'Y', 'V'
-    };
-    // Function to generate a random protein sequence
-    public static String generateProteinSequence(int length) {
-        Random random = new Random();
-        StringBuilder protein = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            char aminoAcid = AMINO_ACIDS[random.nextInt(AMINO_ACIDS.length)];
-            protein.append(aminoAcid);
-        }
-        return protein.toString();
-    }
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the length of the protein sequence to generate: ");
-        int length = scanner.nextInt();
-        if (length <= 0) {
-            System.out.println("Invalid input. Please enter a positive integer.");
-        } else {
-            String proteinSequence = generateProteinSequence(length);
-            System.out.println("Generated Protein Sequence: " + proteinSequence);
-        }
-        scanner.close();
-    }}
-
+?>
+3. Feedback Form (index.php)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Form</title>
+</head>
+<body>
+<h2>User Feedback Form</h2>
+<form method="post" action="submit.php">
+    Name: <input type="text" name="name" required><br><br>
+    Email: <input type="email" name="email" required><br><br>
+    Feedback:<br>
+    <textarea name="message" rows="5" cols="30" required></textarea><br><br>
+    <input type="submit" value="Submit Feedback">
+</form>
+</body>
+</html>
+
+4. Insert File (submit.php)
+<?php
+include 'db.php';
+$name = $_POST['name'];
+$email = $_POST['email'];
+$message = $_POST['message'];
+$sql = "INSERT INTO feedback(name, email, message)
+        VALUES('$name', '$email', '$message')";
+mysqli_query($conn, $sql);
+echo "Thank you for your feedback!";
+?>
 
