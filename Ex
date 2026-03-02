@@ -1,549 +1,461 @@
-PROGRAM 1
-
- index.html
-<!DOCTYPE html>
-<html>
-<body>
-<form action="welcome.php" method="post">
-Name: <input type="text" name="uname"><br><br>
-Age: <input type="number" name="age"><br><br>
-<input type="submit" value="Submit">
-</form>
-</body>
-</html>
-welcome.php
-<?php
-$name = $_POST['uname'];
-$age = $_POST['age'];
-echo "Hello $name! You are $age years old.";
-?>
-
-
-PROGRAM 2
-
-<?php
-function gcd($a, $b) {
-    while($b != 0) {
-        $temp = $b;
-        $b = $a % $b;
-        $a = $temp;
-    }
-    return $a;
-}
-
-$num1 = 24;
-$num2 = 36;
-
-echo "GCD of $num1 and $num2 is: " . gcd($num1, $num2);
-?>
-
-
-PROGRAM 3
-
-
-<?php
-$numbers = array(10, 45, 78, 23, 5, 67, 90, 12, 32, 50);
-
-$maxValue = max($numbers);
-$minValue = min($numbers);
-
-echo "Maximum Value: $maxValue <br>";
-echo "Minimum Value: $minValue";
-?>
-
-
-
-PROGRAM  4
-
-<?php
-// Sample string
-$str = "Hello PHP World";
-
-// String length
-echo "Original String: $str<br>";
-echo "Length of string: " . strlen($str) . "<br>";
-
-// Reverse string
-echo "Reversed string: " . strrev($str) . "<br>";
-
-// Convert to uppercase
-echo "Uppercase: " . strtoupper($str) . "<br>";
-
-// Convert to lowercase
-echo "Lowercase: " . strtolower($str) . "<br>";
-
-// Extract a substring
-echo "Substring (0,5): " . substr($str, 0, 5) . "<br>";
-
-// Find position of 'PHP'
-echo "Position of 'PHP': " . strpos($str, "PHP") . "<br>";
-?>
-
-
-PROGRAM 5
-
-<?php
-    // Demonstration of While Loop
-    echo "<h3>While Loop</h3>";
-    $i = 1;
-    while ($i <= 5) {
-        echo "Number: $i <br>";
-        $i++;
-    }
-
-    // Demonstration of Do-While Loop
-    echo "<h3>Do-While Loop</h3>";
-    $j = 1;
-    do {
-        echo "Number: $j <br>";
-        $j++;
-    } while ($j <= 5);
-?>
-
-
-PROGRAM - 6
-
-<?php
-try {
-    $filename = "data.txt";
-
-    if (!file_exists($filename)) {
-        throw new Exception("File not found");
-    }
-
-    echo "File opened successfully";
-}
-catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
-}
-?>
-
-
-PROGRAM - 7
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Age Calculator</title>
-</head>
-<body>
-
-<h2>Age Calculator</h2>
-
-<form method="post">
-    Enter Date of Birth:
-    <input type="date" name="dob" required>
-    <br><br>
-    <input type="submit" name="submit" value="Calculate Age">
-</form>
-
-<?php
-if (isset($_POST['submit'])) {
-    $dob = $_POST['dob'];
-    $dobDate = new DateTime($dob);
-    $today = new DateTime(date("Y-m-d"));
-    $age = $today->diff($dobDate);
-
-    echo "<h3>Your Age is: " . $age->y . " years</h3>";
-}
-?>
-</body>
-</html>
-
-
-PROGRAM - 8
-
-<?php
-$file = "sample.txt";
-
-if (file_exists($file)) {
-    header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename="' . basename($file) . '"');
-    header('Content-Length: ' . filesize($file));
-    readfile($file);
-    exit;
-} else {
-    echo "File not found!";
-}
-?>
-
-
-PROGRAM - 9
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Program 9 - File Handling</title>
-</head>
-<body>
-    <h2>Add and Display Names</h2>
-
-    <form method="post">
-        Enter Name: <input type="text" name="username" required>
-        <input type="submit" name="submit" value="Add Name">
-    </form>
-
-    <hr>
-
-    <?php
-    $filename = "names.txt";
-
-    // If form is submitted
-    if (isset($_POST['submit'])) {
-        $name = $_POST['username'];
-
-        // Open file in append mode
-        $file = fopen($filename, "a");
-        fwrite($file, $name . "\n");
-        fclose($file);
-
-        echo "<p><b>Name added successfully!</b></p>";
-    }
-
-    // Display all names
-    if (file_exists($filename)) {
-        echo "<h3>List of Names:</h3>";
-        $file = fopen($filename, "r");
-        while (!feof($file)) {
-            echo fgets($file) . "<br>";
-        }
-        fclose($file);
-    }
-    ?>
-
-</body>
-</html>
-
-
-PROGRAM - 10
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>Program 10-Form Controls</title>
-<script>
-function showMessage(){
-alert("Form submitted sucessfully!");
-}
-</script>
-</head>
-<body>
-<h2>User Registration Form</h2>
-<form onsubmit="showMessage()">
-<label>Name:</label>
-<input type="text"name="name"><br><br>
-<label>Gender:</label>
-<input type="radio"name="gender"value="Male">Male
-<input type="radio"name="gender"value="Female">Female<br><br>
-<label>Hobbies:</label>
-<input type="checkbox"name="hobby1"value="Reading">Reading
-<input type="checkbox"name="hobby2"value="Music">Music
-<input type="checkbox"name="hobby3"value="Sports">Sports<br><br>
-<input type="submit"value="Submit">
-<input type="reset"value="Reset">
-</form>
-</body>
-</html>
-
-
-PROGRAM -11
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>Registration Form</title>
-<script>
-function validateForm() {
-  let name = document.forms["regForm"]["name"].value;
-  let email = document.forms["regForm"]["email"].value;
-  let phone = document.forms["regForm"]["phone"].value;
- if (name == "") {
-    alert("Name must be filled out");
-    return false;
-  }
- if (!email.includes("@")) {
-    alert("Invalid email");
-    return false;
-  }
- if (phone.length != 10) {
-    alert("Phone must be 10 digits");
-    return false;
-  }
- document.getElementById("successMsg").innerHTML =
-    "Form registered successfully!";
- document.getElementById("successMsg").style.color = "green";
- document.forms["regForm"].reset();
-  return false;
-}
-</script>
-</head>
-<body>
-<form name="regForm" onsubmit="return validateForm()">
-  Name: <input type="text" name="name"><br>
-  Email: <input type="email" name="email"><br>
-  Password: <input type="password" name="password"><br>
-  Phone: <input type="text" name="phone"><br>
-  <input type="submit" value="Register">
-</form>
-<p id="successMsg"></p>
-</body>
-</html>
-
-
-PROGRAM - 12
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Last Visit Using Cookies</title>
-</head>
-<body>
-<h2>Last Visited Page and Time</h2>
-<p id="display"></p>
-<script>
-function getCookie(name) {
-    let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-if (match) {
-        return match[2];
- } else {
-        return null;
-    }
-}
-let lastVisit = getCookie("visit");
-if (lastVisit != null) {
-    document.getElementById("display").innerHTML = 
-    "Your last visit was on: " + lastVisit;
-} else {
-    document.getElementById("display").innerHTML = 
-    "This is your first visit!";
-}
-let currentTime = new Date();
-document.cookie = "visit=" + currentTime + "; path=/";
-</script>
-</body>
-</html>
-
-PROGRAM - 13
-
-1. Database Table (MySQL)
-CREATE DATABASE student_db;
-
-USE student_db;
-
-CREATE TABLE students (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    email VARCHAR(100),
-    department VARCHAR(50),
-    phone VARCHAR(15)
-);
-2. Database Connection (db.php)
-<?php
-$conn = mysqli_connect("localhost", "root", "", "student_db");
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-?>
-3. Main Page (index.php)
-<?php include 'db.php'; ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Student Management System</title>
-</head>
-<body>
-
-<h2>Student Information Form</h2>
-
-<form method="post" action="insert.php">
-    Name: <input type="text" name="name" required><br><br>
-    Email: <input type="email" name="email" required><br><br>
-    Department: <input type="text" name="department" required><br><br>
-    Phone: <input type="text" name="phone" required><br><br>
-    <input type="submit" value="Add Student">
-</form>
-
-<h2>Student Records</h2>
-<table border="1">
-<tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Department</th>
-    <th>Phone</th>
-    <th>Actions</th>
-</tr>
-<?php
-$result = mysqli_query($conn, "SELECT * FROM students");
-while ($row = mysqli_fetch_assoc($result)) {
-    echo "<tr>";
-    echo "<td>".$row['id']."</td>";
-    echo "<td>".$row['name']."</td>";
-    echo "<td>".$row['email']."</td>";
-    echo "<td>".$row['department']."</td>";
-    echo "<td>".$row['phone']."</td>";
-    echo "<td>
-        <a href='delete.php?id=".$row['id']."'>Delete</a>
-    </td>";
-    echo "</tr>";
-}
-?>
-</table>
-</body>
-</html>
-
-4. Insert File (insert.php)
-<?php
-include 'db.php';
-$name = $_POST['name'];
-$email = $_POST['email'];
-$department = $_POST['department'];
-$phone = $_POST['phone'];
-$sql = "INSERT INTO students(name, email, department, phone)
-        VALUES('$name', '$email', '$department', '$phone')";
-mysqli_query($conn, $sql);
-header("Location: index.php");
-?>
-5. Delete File (delete.php)
-<?php
-include 'db.php';
-$id = $_GET['id'];
-mysqli_query($conn, "DELETE FROM students WHERE id=$id");
-header("Location: index.php");
-?>
-
-
-
-PROGRAM - 14
-
-1. Database Table (MySQL)
-CREATE DATABASE payroll_db;
-USE payroll_db;
-CREATE TABLE payroll (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    emp_name VARCHAR(100),
-    basic_salary FLOAT,
-    hra FLOAT,
-    da FLOAT,
-    deductions FLOAT,
-    gross_salary FLOAT,
-    net_salary FLOAT
+PROGRAM 01:
+
+-- Create Department  table 
+CREATE TABLE Department77 (
+   Dept_ID INT PRIMARY KEY,
+Dept_Name VARCHAR(50)
 );
 
-2. Database Connection (db.php)
-<?php
-$conn = mysqli_connect("localhost", "root", "", "payroll_db");
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-?>
-
-3. Main Page (index.php)
-<?php include 'db.php'; ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Employee Payroll System</title>
-</head>
-<body>
-<h2>Employee Payroll Form</h2>
-<form method="post" action="calculate.php">
-    Employee Name: <input type="text" name="emp_name" required><br><br>
-    Basic Salary: <input type="number" name="basic" required><br><br>
-    HRA: <input type="number" name="hra" required><br><br>
-    DA: <input type="number" name="da" required><br><br>
-    Deductions: <input type="number" name="deductions" required><br><br>
-    <input type="submit" value="Calculate & Save">
-</form>
-<h2>Payroll Records</h2>
-<table border="1">
-<tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Gross Salary</th>
-    <th>Net Salary</th>
-</tr>
-<?php
-$result = mysqli_query($conn, "SELECT * FROM payroll");
-while ($row = mysqli_fetch_assoc($result)) {
-    echo "<tr>";
-    echo "<td>".$row['id']."</td>";
-    echo "<td>".$row['emp_name']."</td>";
-    echo "<td>".$row['gross_salary']."</td>";
-    echo "<td>".$row['net_salary']."</td>";
-    echo "</tr>";
-}
-?>
-</table>
-</body>
-</html>
-
-4. Salary Calculation & Insert (calculate.php)
-<?php
-include 'db.php';
-$emp_name = $_POST['emp_name'];
-$basic = $_POST['basic'];
-$hra = $_POST['hra'];
-$da = $_POST['da'];
-$deductions = $_POST['deductions'];
-$gross = $basic + $hra + $da;
-$net = $gross - $deductions;
-$sql = "INSERT INTO payroll(emp_name, basic_salary, hra, da, deductions, gross_salary, net_salary)
-        VALUES('$emp_name', '$basic', '$hra', '$da', '$deductions', '$gross', '$net')";
-mysqli_query($conn, $sql);
-header("Location: index.php");
-?>
-
-
-
-PROGRAM - 15
-
-1. Database Table (MySQL)
-CREATE DATABASE feedback_db;
-USE feedback_db;
-CREATE TABLE feedback (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    email VARCHAR(100),
-    message TEXT
+-- Create Employee table
+CREATE TABLE Employee77( Emp_ID INT PRIMARY KEY, Emp_Name VARCHAR(50), Gender CHAR,
+Salary DECIMAL(10,2),
+Dept_ID INT
 );
-2. Database Connection (db.php)
-<?php
-$conn = mysqli_connect("localhost", "root", "", "feedback_db");
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-?>
-3. Feedback Form (index.php)
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Feedback Form</title>
-</head>
-<body>
-<h2>User Feedback Form</h2>
-<form method="post" action="submit.php">
-    Name: <input type="text" name="name" required><br><br>
-    Email: <input type="email" name="email" required><br><br>
-    Feedback:<br>
-    <textarea name="message" rows="5" cols="30" required></textarea><br><br>
-    <input type="submit" value="Submit Feedback">
-</form>
-</body>
-</html>
 
-4. Insert File (submit.php)
-<?php
-include 'db.php';
-$name = $_POST['name'];
-$email = $_POST['email'];
-$message = $_POST['message'];
-$sql = "INSERT INTO feedback(name, email, message)
-        VALUES('$name', '$email', '$message')";
-mysqli_query($conn, $sql);
-echo "Thank you for your feedback!";
-?>
+-- Insert records
+Department77 table:
+INSERT INTO Department77 VALUES (1, 'cs');
+INSERT INTO Department77 VALUES (2, 'IT');
+INSERT INTO Department77 VALUES (3, 'ACCOUNTS');
+INSERT INTO Department77 VALUES (1, 'MARKETING');
+INSERT INTO Department77 VALUES (1, 'ADMIN');
+EMPLOYEE77 TABLE
+
+INSERT INTO Employee77 VALUES (101, 'ravi', 'm', 50000.00, 1);
+INSERT INTO Employee77 VALUES (102, 'mohan', 'M', 40000.00, 2);
+INSERT INTO Employee77 VALUES (103, 'sita', 'F', 55000.00, 4);
+INSERT INTO Employee77 VALUES (104, 'madhan', 'M', 28000.00, 5);
+INSERT INTO Employee77 VALUES (105, 'rupa', 'F', 55000.00, 2);
+INSERT INTO Employee77 VALUES (106, 'deepika', 'F', 25000.00, 3);
+INSERT INTO Employee77 VALUES (107, 'kala', 'F', 15000.00, 1);
+
+
+-- Update record
+UPDATE Employee77 SET Salary = 65000 WHERE Emp_ID = 102;
+
+
+-- Delete record
+DELETE FROM Employee77 WHERE Emp_ID = 103;
+
+
+
+
+
+
+PROGRAM 02:
+
+--Display employee salary as updated, incremented salary(ARITHMETIC OPERATORS)
+SQL>SELECT id, salary, salary + 1000 AS updated_salary, salary * 1.1 AS increased_salary FROM employees;
+
+     -- Display employees with salary greater than 25000(COMPARISON OPERATOR)
+SQL>SELECT * FROM Employee WHERE Salary > 25000;
+
+-- Display employees from IT department
+SQL>SELECT * FROM Employee WHERE Dept_ID = 4;
+
+-- Display employees whose names start with 'M' (LIKE OPERATOR)
+SQL>SELECT * FROM Employee WHERE Emp_Name LIKE 'M%';
+-- Display employees whose salary is between 20000 and 50000(LOGICAL OPERATOR)
+SQL> SELECT * FROM Employee WHERE Salary BETWEEN 20000 AND 50000;
+
+-- Display employees not in HR department (IN OPERATOR)
+ 	SQL>SELECT * FROM Employee WHERE Dept_ID NOT IN (1);
+
+
+
+
+
+
+PROGRAM 03
+
+-- Create Student77 table CREATE TABLE Student77 ( ID INT PRIMARY KEY,
+NAME VARCHAR(50), MARKS INT,
+AGE INT
+);
+
+
+-- Insert records
+INSERT INTO Student77 VALUES (1, 'Harsh', 90, 19);
+INSERT INTO Student77 VALUES (2, 'Suresh', 50, 20);
+INSERT INTO Student77 VALUES (3, 'Pratik', 80, 19);
+INSERT INTO Student77 VALUES (4, 'Dhanraj', 95, 21);
+INSERT INTO Student77 VALUES (5, 'Ram', 85, 18);
+
+-- Display the table
+SELECT * FROM Student77;
+
+
+-- Find average marks
+SELECT AVG(MARKS) AS Average_Marks FROM Student77;
+
+
+-- Find total number of student77
+SELECT COUNT(*) AS Total_No_Student77 FROM Student77;
+
+
+-- Find first student (by ID)
+SELECT NAME AS First_Student FROM Student77 WHERE ID = (SELECT MIN(ID) FROM
+Student77);
+
+
+-- Find last student (by ID)
+SELECT NAME AS Last_Student FROM Student77 WHERE ID = (SELECT MAX(ID) FROM
+Student77);
+
+
+-- Find highest marks
+SELECT MAX(MARKS) AS Highest_Marks FROM Student77;
+
+
+-- Find lowest marks
+SELECT MIN(MARKS) AS Lowest_Marks FROM Student77;
+
+
+-- Find sum of all marks
+SELECT SUM(MARKS) AS Total_Marks FROM Student77;
+
+
+
+
+
+
+
+
+PROGRAM 04
+
+-- Nested Query: 
+
+1) Find employees who earn more than the average salary
+
+SELECT Emp_Name, Salary FROM Employee
+WHERE Salary > (SELECT AVG(Salary) FROM Employee);
+
+2) Find Employees working in a specific department
+
+SELECT Emp_Name
+FROM Employee
+WHERE Dept_ID IN (SELECT Dept_ID
+                  FROM Department
+                  WHERE Dept_Name = 'IT');
+
+3) List employees whose department is NOT assigned
+
+SELECT Emp_Name
+FROM Employee
+WHERE Dept_ID NOT IN (SELECT Dept_ID FROM Department);
+
+
+
+
+--JOINS:
+
+-- Inner Join: Display employee name and their department
+SELECT E.Emp_Name, D.Dept_Name
+FROM Employee E
+JOIN Department D ON E.Dept_ID = D.Dept_ID;
+
+-- Left Join: Display all departments with employees (if any)
+SELECT D.Dept_Name, E.Emp_Name
+FROM Department D
+LEFT JOIN Employee E ON D.Dept_ID = E.Dept_ID;
+
+----Right Join: Display ALL employees, along with their department names.
+SELECT D.Dept_Name, E.Emp_Name
+FROM Department D
+RIGHT JOIN Employee E ON D.Dept_ID = E.Dept_ID;
+
+
+
+
+
+
+
+
+
+
+PROGRAM 05
+
+----table create---
+
+CREATE TABLE departments (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(50),
+    location VARCHAR(50)
+);
+
+CREATE TABLE employee (
+    employee_id INT PRIMARY KEY,
+    employee_name VARCHAR(50),
+    salary DECIMAL(10,2),
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES departments(department_id)
+);
+
+----insert table----
+
+INSERT INTO departments (department_id, department_name, location) VALUES
+(1, 'HR', 'Delhi'),
+(2, 'IT', 'Mumbai'),
+(3, 'Finance', 'Delhi'),
+(4, 'Marketing', 'Chennai');
+
+
+INSERT INTO employee (employee_id, employee_name, salary, department_id) VALUES
+(101, 'Arun', 45000, 1),
+(102, 'Priya', 60000, 1),
+(103, 'Rahul', 75000, 2),
+(104, 'Sneha', 50000, 2),
+(105, 'Kiran', 90000, 3),
+(106, 'Meena', 55000, 3),
+(107, 'Vikram', 40000, 4);
+
+
+-- 1. Select employees from departments located in Delhi
+SELECT employee
+FROM employee
+WHERE department_id IN (
+    SELECT department_id
+    FROM departments
+    WHERE location = 'Delhi'
+);
+
+-- 2. Select employee(s) with maximum salary in each department
+SELECT e.employee_name, e.salary, e.department_id
+FROM employee e
+WHERE e.salary = (
+    SELECT MAX(salary)
+    FROM employee
+    WHERE department_id = e.department_id
+);
+
+-- 3. Create view for high salary employees
+CREATE VIEW High_Salary_View AS
+SELECT employee_name, salary
+FROM employee
+WHERE salary > 50000;
+
+-- 4. Create or replace basic employee view
+CREATE OR REPLACE VIEW emp_basic_view AS
+SELECT employee_id, employee_name, salary
+FROM employee;
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 06:
+
+SQL>CREATE TABLE Department (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(50) NOT NULL
+);
+
+
+SQL>CREATE TABLE Student (
+    StudentID INT PRIMARY KEY,               -- PRIMARY KEY constraint
+    Name VARCHAR(50) NOT NULL,         -- NOT NULL constraint
+    Age INT CHECK (Age >= 18),                -- CHECK constraint
+    Email VARCHAR(50) UNIQUE,                 -- UNIQUE constraint
+    DepartmentID INT,                         
+    CONSTRAINT fk_dept
+        FOREIGN KEY (DepartmentID)            -- FOREIGN KEY constraint
+        REFERENCES Department(DepartmentID)
+);
+
+
+
+
+OUTPUT:
+
+SQL>INSERT INTO Department VALUES (1, 'Computer Science');
+
+SQL>INSERT INTO Student VALUES (101, 'Arun', 20, 'arun@gmail.com', 1);
+
+SQL>INSERT INTO Student VALUES (102, NULL, 22, 'ram@gmail.com', 1);
+
+
+SQL>INSERT INTO Student VALUES (103, 'Ravi', 16, 'ravi@gmail.com', 1);
+
+
+SQL>INSERT INTO Student VALUES (104, 'Kumar', 21, 'arun@gmail.com', 1);
+
+
+SQL>INSERT INTO Student VALUES (101, 'Siva', 22, 'siva@gmail.com', 1);
+
+
+VALUES (105, 'Meena', 23, 'meena@gmail.com', 5);
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 07:
+
+Table creation:
+SQL>CREATE TABLE Employee (
+    EmpID INT PRIMARY KEY,
+    EmpName VARCHAR(50),
+    Department VARCHAR(30),
+    Salary INT
+);
+INSERT RECORDS:
+INSERT INTO Employee VALUES (1, 'Arun', 'CS', 30000);
+INSERT INTO Employee VALUES (2, 'Kumar', 'CS', 35000);
+INSERT INTO Employee VALUES (3, 'Meena', 'IT', 50000);
+INSERT INTO Employee VALUES (4, 'Ravi', 'IT', 65000);
+INSERT INTO Employee VALUES (5, 'Sita', 'CS', 25000);
+INSERT INTO Employee VALUES (6, 'mona', 'CA', 25000);
+
+GROUPBY CLAUSE DEMONSTRATION- Total salary department-wise
+SQL>
+SELECT Department, SUM(Salary) AS Total_Salary
+FROM Employee
+GROUP BY Department;
+
+    HAVING CLAUSE DEMONSTRATION- Departments with total salary lesser than 50,000
+SQL> SELECT Department, SUM(Salary) AS Total_Salary
+FROM Employee
+GROUP BY Department
+HAVING SUM(Salary) < 50000;
+ORDERBY DEMONSTRATION -- Order employees by salary descending
+SQL> SELECT Emp_Name, Salary FROM Employee ORDER BY Salary DESC;
+INDEXING
+CREATE INDEX idx_department ON Employee(Department);
+
+
+
+
+
+
+
+
+
+PROGRAM 08: 
+
+PROGRAM 
+CREATE OR REPLACE PROCEDURE arithmetic_ops(a IN NUMBER, b IN NUMBER)
+IS
+add_result NUMBER;
+sub_result NUMBER;
+mul_result NUMBER;
+div_result NUMBER;
+BEGIN
+add_result := a + b;
+sub_result := a - b;
+mul_result := a * b;
+IF b != 0 THEN
+div_result := a / b;
+ELSE
+div_result := NULL;
+END IF;
+DBMS_OUTPUT.PUT_LINE('First Number :' || a);
+DBMS_OUTPUT.PUT_LINE('Second Number :'|| b);
+DBMS_OUTPUT.PUT_LINE('Addition : ' || add_result);
+DBMS_OUTPUT.PUT_LINE('Subtraction : '|| sub_result);
+DBMS_OUTPUT.PUT_LINE('Multiplication:'|| mul_result);
+IF b != 0 THEN
+DBMS_OUTPUT.PUT_LINE('Division : ' || div_result);
+ELSE
+DBMS_OUTPUT.PUT_LINE('Division : Cannot divide by zero');
+END IF;
+END;
+/
+
+Execution Command:
+EXEC arithmetic_ops(10, 5);
+
+
+
+
+
+
+
+
+PROGRAM 09:
+
+
+Step 1: Create Table
+CREATE TABLE emp (
+    emp_id NUMBER PRIMARY KEY,
+    emp_name VARCHAR2(30),
+    age NUMBER,
+    salary NUMBER
+);
+Step 2: Create Trigger Using IF–ELSE
+CREATE OR REPLACE TRIGGER trg_emp_validation
+BEFORE INSERT OR UPDATE ON emp
+FOR EACH ROW
+BEGIN
+    IF :NEW.salary < 10000 THEN
+        RAISE_APPLICATION_ERROR(-20001,
+        'Salary must be at least 10000');
+        
+    ELSIF :NEW.age < 18 THEN
+        RAISE_APPLICATION_ERROR(-20002,
+        'Employee age must be 18 or above');
+        
+    ELSE
+        NULL; -- valid data
+    END IF;
+END;
+/
+
+INSERT INTO employee VALUES (101, 'Kiran', 25, 20000);
+
+INSERT INTO employee VALUES (102, 'Anitha', 28, 5000);
+
+INSERT INTO employeeC VALUES (103, 'Ramesh', 16, 15000);
+
+UPDATE employeeC
+SET salary = 8000
+WHERE emp_id = 101;
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 10:
+
+
+STEP 1: CREATE EMPLOYEE TABLE
+CREATE TABLE employee (
+    emp_id NUMBER PRIMARY KEY,
+    emp_name VARCHAR2(30),
+    age NUMBER,
+    salary NUMBER
+);
+STEP 2: Create PL/SQL BLOCK
+DECLARE
+    v_emp_id   emp444.emp_id%TYPE := 102;   			-- employee to search
+    v_salary   employee.salary%TYPE;
+BEGIN
+    SELECT salary
+    INTO v_salary
+    FROM employee
+    WHERE emp_id = v_emp_id;
+    DBMS_OUTPUT.PUT_LINE('Salary of Employee ID ' || v_emp_id || ' is ' || v_salary);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Employee not found');
+    WHEN TOO_MANY_ROWS THEN
+        DBMS_OUTPUT.PUT_LINE('More than one employee found');
+END;
 
