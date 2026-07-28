@@ -1,461 +1,158 @@
-PROGRAM 01:
+PROGRAM 1 (UNIX):
 
--- Create Department  table 
-CREATE TABLE Department77 (
-   Dept_ID INT PRIMARY KEY,
-Dept_Name VARCHAR(50)
-);
+# 1. DATE COMMAND
+date
+date +%c
+date +%m
+date +%h
+date +%d
+date +%y
+date +%H
+date +%M
+date +%S
 
--- Create Employee table
-CREATE TABLE Employee77( Emp_ID INT PRIMARY KEY, Emp_Name VARCHAR(50), Gender CHAR,
-Salary DECIMAL(10,2),
-Dept_ID INT
-);
+# 2. CALENDAR COMMAND
+cal
+cal 2026
+cal 06 2026
 
--- Insert records
-Department77 table:
-INSERT INTO Department77 VALUES (1, 'cs');
-INSERT INTO Department77 VALUES (2, 'IT');
-INSERT INTO Department77 VALUES (3, 'ACCOUNTS');
-INSERT INTO Department77 VALUES (1, 'MARKETING');
-INSERT INTO Department77 VALUES (1, 'ADMIN');
-EMPLOYEE77 TABLE
+# 3. ECHO COMMAND
+echo "text"
 
-INSERT INTO Employee77 VALUES (101, 'ravi', 'm', 50000.00, 1);
-INSERT INTO Employee77 VALUES (102, 'mohan', 'M', 40000.00, 2);
-INSERT INTO Employee77 VALUES (103, 'sita', 'F', 55000.00, 4);
-INSERT INTO Employee77 VALUES (104, 'madhan', 'M', 28000.00, 5);
-INSERT INTO Employee77 VALUES (105, 'rupa', 'F', 55000.00, 2);
-INSERT INTO Employee77 VALUES (106, 'deepika', 'F', 25000.00, 3);
-INSERT INTO Employee77 VALUES (107, 'kala', 'F', 15000.00, 1);
+# 4. DIRECTORY COMMAND
+ls
 
+# 5. MANUAL HELP
+man cat
 
--- Update record
-UPDATE Employee77 SET Salary = 65000 WHERE Emp_ID = 102;
+# 6. CURRENT DIRECTORY
+pwd
+who am i
+tty
 
+# 7. CREATE AND MANAGE DIRECTORY
+mkdir directory_name
+cd directory_name
+cd ..
+rmdir directory_name
 
--- Delete record
-DELETE FROM Employee77 WHERE Emp_ID = 103;
+# 8. FILE MANIPULATION
+cat > filename
+cat >> filename
+cat filename
 
+cp source_file destination_file
+mv source_file destination_file
+rm filename
 
+head filename
+head -2 filename
 
+tail filename
+tail -2 filename
 
+wc -l filename
+wc -w filename
+wc -c filename
+
+# 9. STOP
+clear
 
 
 PROGRAM 02:
 
---Display employee salary as updated, incremented salary(ARITHMETIC OPERATORS)
-SQL>SELECT id, salary, salary + 1000 AS updated_salary, salary * 1.1 AS increased_salary FROM employees;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int main() {
+int n, i;
+int *arr;
+printf(&quot;Enter number of elements: &quot;);
+scanf(&quot;%d&quot;, &amp;n);
+arr = (int *)malloc(n * sizeof(int));
+if (arr == NULL) {
+printf(&quot;Memory allocation failed\n&quot;);
+return 1;
+}
+
+printf(&quot;Enter elements:\n&quot;);
+
+for(i = 0; i &lt; n; i++)
+scanf(&quot;%d&quot;, &amp;arr[i]);
+printf(&quot;Elements are:\n&quot;);
+for(i = 0; i &lt; n; i++)
+printf(&quot;%d &quot;, arr[i]);
+free(arr);
+return 0;
+}
+
+PROGRAM 3:
+
+#include &lt;stdio.h&gt;
+int main() {
+int pages[50], frames[10];
+int n, f, i, j, k, fault = 0, found;
+printf(&quot;Enter number of pages: &quot;);
+scanf(&quot;%d&quot;, &amp;n);
+printf(&quot;Enter page reference string:\n&quot;);
+for(i = 0; i &lt; n; i++)
+scanf(&quot;%d&quot;, &amp;pages[i]);
+printf(&quot;Enter number of frames: &quot;);
+scanf(&quot;%d&quot;, &amp;f);
+for(i = 0; i &lt; f; i++)
+frames[i] = -1;
+k = 0;
+for(i = 0; i &lt; n; i++) {
+found = 0;
+for(j = 0; j &lt; f; j++) {
+if(frames[j] == pages[i]) {
+
+found = 1;
+break;
+}
+}
+if(!found) {
+frames[k] = pages[i];
+k = (k + 1) % f;
+fault++;
+}
+}
+printf(&quot;Total Page Faults = %d\n&quot;, fault);
+return 0;
+}
+
+
+PROGRAM 4:
+
+#include &lt;stdio.h&gt;
+int main() {
+int pages[50], frame[10];
+int n, f, i, j, k = 0, faults = 0, found;
+printf(&quot;Enter number of pages: &quot;);
+scanf(&quot;%d&quot;, &amp;n);
+printf(&quot;Enter reference string:\n&quot;);
+for(i = 0; i &lt; n; i++)
+scanf(&quot;%d&quot;, &amp;pages[i]);
+printf(&quot;Enter number of frames: &quot;);
+scanf(&quot;%d&quot;, &amp;f);
+for(i = 0; i &lt; f; i++)
+frame[i] = -1;
+for(i = 0; i &lt; n; i++) {
+found = 0;
+for(j = 0; j &lt; f; j++)
+if(frame[j] == pages[i])
+found = 1;
+if(!found) {
+frame[k] = pages[i];
+k = (k + 1) % f;
+faults++;
+}
+}
+printf(&quot;Page Faults = %d\n&quot;, faults);
+
+return 0;
+}
 
-     -- Display employees with salary greater than 25000(COMPARISON OPERATOR)
-SQL>SELECT * FROM Employee WHERE Salary > 25000;
 
--- Display employees from IT department
-SQL>SELECT * FROM Employee WHERE Dept_ID = 4;
 
--- Display employees whose names start with 'M' (LIKE OPERATOR)
-SQL>SELECT * FROM Employee WHERE Emp_Name LIKE 'M%';
--- Display employees whose salary is between 20000 and 50000(LOGICAL OPERATOR)
-SQL> SELECT * FROM Employee WHERE Salary BETWEEN 20000 AND 50000;
 
--- Display employees not in HR department (IN OPERATOR)
- 	SQL>SELECT * FROM Employee WHERE Dept_ID NOT IN (1);
-
-
-
-
-
-
-PROGRAM 03
-
--- Create Student77 table CREATE TABLE Student77 ( ID INT PRIMARY KEY,
-NAME VARCHAR(50), MARKS INT,
-AGE INT
-);
-
-
--- Insert records
-INSERT INTO Student77 VALUES (1, 'Harsh', 90, 19);
-INSERT INTO Student77 VALUES (2, 'Suresh', 50, 20);
-INSERT INTO Student77 VALUES (3, 'Pratik', 80, 19);
-INSERT INTO Student77 VALUES (4, 'Dhanraj', 95, 21);
-INSERT INTO Student77 VALUES (5, 'Ram', 85, 18);
-
--- Display the table
-SELECT * FROM Student77;
-
-
--- Find average marks
-SELECT AVG(MARKS) AS Average_Marks FROM Student77;
-
-
--- Find total number of student77
-SELECT COUNT(*) AS Total_No_Student77 FROM Student77;
-
-
--- Find first student (by ID)
-SELECT NAME AS First_Student FROM Student77 WHERE ID = (SELECT MIN(ID) FROM
-Student77);
-
-
--- Find last student (by ID)
-SELECT NAME AS Last_Student FROM Student77 WHERE ID = (SELECT MAX(ID) FROM
-Student77);
-
-
--- Find highest marks
-SELECT MAX(MARKS) AS Highest_Marks FROM Student77;
-
-
--- Find lowest marks
-SELECT MIN(MARKS) AS Lowest_Marks FROM Student77;
-
-
--- Find sum of all marks
-SELECT SUM(MARKS) AS Total_Marks FROM Student77;
-
-
-
-
-
-
-
-
-PROGRAM 04
-
--- Nested Query: 
-
-1) Find employees who earn more than the average salary
-
-SELECT Emp_Name, Salary FROM Employee
-WHERE Salary > (SELECT AVG(Salary) FROM Employee);
-
-2) Find Employees working in a specific department
-
-SELECT Emp_Name
-FROM Employee
-WHERE Dept_ID IN (SELECT Dept_ID
-                  FROM Department
-                  WHERE Dept_Name = 'IT');
-
-3) List employees whose department is NOT assigned
-
-SELECT Emp_Name
-FROM Employee
-WHERE Dept_ID NOT IN (SELECT Dept_ID FROM Department);
-
-
-
-
---JOINS:
-
--- Inner Join: Display employee name and their department
-SELECT E.Emp_Name, D.Dept_Name
-FROM Employee E
-JOIN Department D ON E.Dept_ID = D.Dept_ID;
-
--- Left Join: Display all departments with employees (if any)
-SELECT D.Dept_Name, E.Emp_Name
-FROM Department D
-LEFT JOIN Employee E ON D.Dept_ID = E.Dept_ID;
-
-----Right Join: Display ALL employees, along with their department names.
-SELECT D.Dept_Name, E.Emp_Name
-FROM Department D
-RIGHT JOIN Employee E ON D.Dept_ID = E.Dept_ID;
-
-
-
-
-
-
-
-
-
-
-PROGRAM 05
-
-----table create---
-
-CREATE TABLE departments (
-    department_id INT PRIMARY KEY,
-    department_name VARCHAR(50),
-    location VARCHAR(50)
-);
-
-CREATE TABLE employee (
-    employee_id INT PRIMARY KEY,
-    employee_name VARCHAR(50),
-    salary DECIMAL(10,2),
-    department_id INT,
-    FOREIGN KEY (department_id) REFERENCES departments(department_id)
-);
-
-----insert table----
-
-INSERT INTO departments (department_id, department_name, location) VALUES
-(1, 'HR', 'Delhi'),
-(2, 'IT', 'Mumbai'),
-(3, 'Finance', 'Delhi'),
-(4, 'Marketing', 'Chennai');
-
-
-INSERT INTO employee (employee_id, employee_name, salary, department_id) VALUES
-(101, 'Arun', 45000, 1),
-(102, 'Priya', 60000, 1),
-(103, 'Rahul', 75000, 2),
-(104, 'Sneha', 50000, 2),
-(105, 'Kiran', 90000, 3),
-(106, 'Meena', 55000, 3),
-(107, 'Vikram', 40000, 4);
-
-
--- 1. Select employees from departments located in Delhi
-SELECT employee
-FROM employee
-WHERE department_id IN (
-    SELECT department_id
-    FROM departments
-    WHERE location = 'Delhi'
-);
-
--- 2. Select employee(s) with maximum salary in each department
-SELECT e.employee_name, e.salary, e.department_id
-FROM employee e
-WHERE e.salary = (
-    SELECT MAX(salary)
-    FROM employee
-    WHERE department_id = e.department_id
-);
-
--- 3. Create view for high salary employees
-CREATE VIEW High_Salary_View AS
-SELECT employee_name, salary
-FROM employee
-WHERE salary > 50000;
-
--- 4. Create or replace basic employee view
-CREATE OR REPLACE VIEW emp_basic_view AS
-SELECT employee_id, employee_name, salary
-FROM employee;
-
-
-
-
-
-
-
-
-
-
-
-PROGRAM 06:
-
-SQL>CREATE TABLE Department (
-    DepartmentID INT PRIMARY KEY,
-    DepartmentName VARCHAR(50) NOT NULL
-);
-
-
-SQL>CREATE TABLE Student (
-    StudentID INT PRIMARY KEY,               -- PRIMARY KEY constraint
-    Name VARCHAR(50) NOT NULL,         -- NOT NULL constraint
-    Age INT CHECK (Age >= 18),                -- CHECK constraint
-    Email VARCHAR(50) UNIQUE,                 -- UNIQUE constraint
-    DepartmentID INT,                         
-    CONSTRAINT fk_dept
-        FOREIGN KEY (DepartmentID)            -- FOREIGN KEY constraint
-        REFERENCES Department(DepartmentID)
-);
-
-
-
-
-OUTPUT:
-
-SQL>INSERT INTO Department VALUES (1, 'Computer Science');
-
-SQL>INSERT INTO Student VALUES (101, 'Arun', 20, 'arun@gmail.com', 1);
-
-SQL>INSERT INTO Student VALUES (102, NULL, 22, 'ram@gmail.com', 1);
-
-
-SQL>INSERT INTO Student VALUES (103, 'Ravi', 16, 'ravi@gmail.com', 1);
-
-
-SQL>INSERT INTO Student VALUES (104, 'Kumar', 21, 'arun@gmail.com', 1);
-
-
-SQL>INSERT INTO Student VALUES (101, 'Siva', 22, 'siva@gmail.com', 1);
-
-
-VALUES (105, 'Meena', 23, 'meena@gmail.com', 5);
-
-
-
-
-
-
-
-
-
-
-
-PROGRAM 07:
-
-Table creation:
-SQL>CREATE TABLE Employee (
-    EmpID INT PRIMARY KEY,
-    EmpName VARCHAR(50),
-    Department VARCHAR(30),
-    Salary INT
-);
-INSERT RECORDS:
-INSERT INTO Employee VALUES (1, 'Arun', 'CS', 30000);
-INSERT INTO Employee VALUES (2, 'Kumar', 'CS', 35000);
-INSERT INTO Employee VALUES (3, 'Meena', 'IT', 50000);
-INSERT INTO Employee VALUES (4, 'Ravi', 'IT', 65000);
-INSERT INTO Employee VALUES (5, 'Sita', 'CS', 25000);
-INSERT INTO Employee VALUES (6, 'mona', 'CA', 25000);
-
-GROUPBY CLAUSE DEMONSTRATION- Total salary department-wise
-SQL>
-SELECT Department, SUM(Salary) AS Total_Salary
-FROM Employee
-GROUP BY Department;
-
-    HAVING CLAUSE DEMONSTRATION- Departments with total salary lesser than 50,000
-SQL> SELECT Department, SUM(Salary) AS Total_Salary
-FROM Employee
-GROUP BY Department
-HAVING SUM(Salary) < 50000;
-ORDERBY DEMONSTRATION -- Order employees by salary descending
-SQL> SELECT Emp_Name, Salary FROM Employee ORDER BY Salary DESC;
-INDEXING
-CREATE INDEX idx_department ON Employee(Department);
-
-
-
-
-
-
-
-
-
-PROGRAM 08: 
-
-PROGRAM 
-CREATE OR REPLACE PROCEDURE arithmetic_ops(a IN NUMBER, b IN NUMBER)
-IS
-add_result NUMBER;
-sub_result NUMBER;
-mul_result NUMBER;
-div_result NUMBER;
-BEGIN
-add_result := a + b;
-sub_result := a - b;
-mul_result := a * b;
-IF b != 0 THEN
-div_result := a / b;
-ELSE
-div_result := NULL;
-END IF;
-DBMS_OUTPUT.PUT_LINE('First Number :' || a);
-DBMS_OUTPUT.PUT_LINE('Second Number :'|| b);
-DBMS_OUTPUT.PUT_LINE('Addition : ' || add_result);
-DBMS_OUTPUT.PUT_LINE('Subtraction : '|| sub_result);
-DBMS_OUTPUT.PUT_LINE('Multiplication:'|| mul_result);
-IF b != 0 THEN
-DBMS_OUTPUT.PUT_LINE('Division : ' || div_result);
-ELSE
-DBMS_OUTPUT.PUT_LINE('Division : Cannot divide by zero');
-END IF;
-END;
-/
-
-Execution Command:
-EXEC arithmetic_ops(10, 5);
-
-
-
-
-
-
-
-
-PROGRAM 09:
-
-
-Step 1: Create Table
-CREATE TABLE emp (
-    emp_id NUMBER PRIMARY KEY,
-    emp_name VARCHAR2(30),
-    age NUMBER,
-    salary NUMBER
-);
-Step 2: Create Trigger Using IF–ELSE
-CREATE OR REPLACE TRIGGER trg_emp_validation
-BEFORE INSERT OR UPDATE ON emp
-FOR EACH ROW
-BEGIN
-    IF :NEW.salary < 10000 THEN
-        RAISE_APPLICATION_ERROR(-20001,
-        'Salary must be at least 10000');
-        
-    ELSIF :NEW.age < 18 THEN
-        RAISE_APPLICATION_ERROR(-20002,
-        'Employee age must be 18 or above');
-        
-    ELSE
-        NULL; -- valid data
-    END IF;
-END;
-/
-
-INSERT INTO employee VALUES (101, 'Kiran', 25, 20000);
-
-INSERT INTO employee VALUES (102, 'Anitha', 28, 5000);
-
-INSERT INTO employeeC VALUES (103, 'Ramesh', 16, 15000);
-
-UPDATE employeeC
-SET salary = 8000
-WHERE emp_id = 101;
-
-
-
-
-
-
-
-
-
-
-
-PROGRAM 10:
-
-
-STEP 1: CREATE EMPLOYEE TABLE
-CREATE TABLE employee (
-    emp_id NUMBER PRIMARY KEY,
-    emp_name VARCHAR2(30),
-    age NUMBER,
-    salary NUMBER
-);
-STEP 2: Create PL/SQL BLOCK
-DECLARE
-    v_emp_id   emp444.emp_id%TYPE := 102;   			-- employee to search
-    v_salary   employee.salary%TYPE;
-BEGIN
-    SELECT salary
-    INTO v_salary
-    FROM employee
-    WHERE emp_id = v_emp_id;
-    DBMS_OUTPUT.PUT_LINE('Salary of Employee ID ' || v_emp_id || ' is ' || v_salary);
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('Employee not found');
-    WHEN TOO_MANY_ROWS THEN
-        DBMS_OUTPUT.PUT_LINE('More than one employee found');
-END;
 
