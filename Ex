@@ -1,158 +1,102 @@
-PROGRAM 1 (UNIX):
-
-# 1. DATE COMMAND
-date
-date +%c
-date +%m
-date +%h
-date +%d
-date +%y
-date +%H
-date +%M
-date +%S
-
-# 2. CALENDAR COMMAND
-cal
-cal 2026
-cal 06 2026
-
-# 3. ECHO COMMAND
-echo "text"
-
-# 4. DIRECTORY COMMAND
-ls
-
-# 5. MANUAL HELP
-man cat
-
-# 6. CURRENT DIRECTORY
-pwd
-who am i
-tty
-
-# 7. CREATE AND MANAGE DIRECTORY
-mkdir directory_name
-cd directory_name
-cd ..
-rmdir directory_name
-
-# 8. FILE MANIPULATION
-cat > filename
-cat >> filename
-cat filename
-
-cp source_file destination_file
-mv source_file destination_file
-rm filename
-
-head filename
-head -2 filename
-
-tail filename
-tail -2 filename
-
-wc -l filename
-wc -w filename
-wc -c filename
-
-# 9. STOP
-clear
+P! CODE: 1
+!pip install pypdf2
+import PyPDF2
+import requests
+from bs4 import BeautifulSoup
+pdf_path = "/content/1.pdf"
+reader = PyPDF2.PdfReader(pdf_path)
+pdf_text = ""
+for page in reader.pages:
+    pdf_text += page.extract_text()
+    print("PDF Text:\n", pdf_text)
 
 
-PROGRAM 02:
-
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-int main() {
-int n, i;
-int *arr;
-printf(&quot;Enter number of elements: &quot;);
-scanf(&quot;%d&quot;, &amp;n);
-arr = (int *)malloc(n * sizeof(int));
-if (arr == NULL) {
-printf(&quot;Memory allocation failed\n&quot;);
-return 1;
-}
-
-printf(&quot;Enter elements:\n&quot;);
-
-for(i = 0; i &lt; n; i++)
-scanf(&quot;%d&quot;, &amp;arr[i]);
-printf(&quot;Elements are:\n&quot;);
-for(i = 0; i &lt; n; i++)
-printf(&quot;%d &quot;, arr[i]);
-free(arr);
-return 0;
-}
-
-PROGRAM 3:
-
-#include &lt;stdio.h&gt;
-int main() {
-int pages[50], frames[10];
-int n, f, i, j, k, fault = 0, found;
-printf(&quot;Enter number of pages: &quot;);
-scanf(&quot;%d&quot;, &amp;n);
-printf(&quot;Enter page reference string:\n&quot;);
-for(i = 0; i &lt; n; i++)
-scanf(&quot;%d&quot;, &amp;pages[i]);
-printf(&quot;Enter number of frames: &quot;);
-scanf(&quot;%d&quot;, &amp;f);
-for(i = 0; i &lt; f; i++)
-frames[i] = -1;
-k = 0;
-for(i = 0; i &lt; n; i++) {
-found = 0;
-for(j = 0; j &lt; f; j++) {
-if(frames[j] == pages[i]) {
-
-found = 1;
-break;
-}
-}
-if(!found) {
-frames[k] = pages[i];
-k = (k + 1) % f;
-fault++;
-}
-}
-printf(&quot;Total Page Faults = %d\n&quot;, fault);
-return 0;
-}
-
-
-PROGRAM 4:
-
-#include &lt;stdio.h&gt;
-int main() {
-int pages[50], frame[10];
-int n, f, i, j, k = 0, faults = 0, found;
-printf(&quot;Enter number of pages: &quot;);
-scanf(&quot;%d&quot;, &amp;n);
-printf(&quot;Enter reference string:\n&quot;);
-for(i = 0; i &lt; n; i++)
-scanf(&quot;%d&quot;, &amp;pages[i]);
-printf(&quot;Enter number of frames: &quot;);
-scanf(&quot;%d&quot;, &amp;f);
-for(i = 0; i &lt; f; i++)
-frame[i] = -1;
-for(i = 0; i &lt; n; i++) {
-found = 0;
-for(j = 0; j &lt; f; j++)
-if(frame[j] == pages[i])
-found = 1;
-if(!found) {
-frame[k] = pages[i];
-k = (k + 1) % f;
-faults++;
-}
-}
-printf(&quot;Page Faults = %d\n&quot;, faults);
-
-return 0;
-}
+P1 CODE:2
+url = "https://example.com"
+html = requests.get(url).text
+soup = BeautifulSoup(html, "html.parser")
+print("HTML Text:\n", soup.get_text())
 
 
 
+P2
+import requests
+from bs4 import BeautifulSoup
+url = &quot;https://en.wikipedia.org/wiki/Web_scraping&quot;
+response = requests.get(url)
+soup = BeautifulSoup(response.text, &#39;html.parser&#39;)
+content = soup.find(&#39;div&#39;, {&#39;class&#39;: &#39;mw-parser-output&#39;})
+paragraphs = content.find_all(&#39;p&#39;)
+for p in paragraphs:
+text = p.get_text(strip=True)
+if text:
+print(text)
 
+
+
+P3
+
+text = &quot;NLP is fun and AI is cool&quot;
+lookup = {&quot;NLP&quot;: &quot;Natural Language Processing&quot;, &quot;AI&quot;: &quot;Artificial Intelligence&quot;}
+short_words = [w for w in text.split() if len(w) &lt;= 3]
+print(&quot;Lookup:&quot;, {w: lookup.get(w, &quot;Not found&quot;) for w in text.split()})
+print(&quot;Short words:&quot;, short_words)
+
+
+P4
+
+from textblob import TextBlob
+a= input("Enter a sentence with spelling mistakes: ")
+blob = TextBlob(a)
+corrected_text = blob.correct()
+print("\nCorrected Sentence:")
+print(corrected_text)
+
+
+P5
+
+import matplotlib.pyplot as plt
+text = "Natural language processing enables computers to understand text"
+words = text.split()
+long_words = [w for w in words if len(w) > 5]
+plt.bar(long_words, [len(w) for w in long_words])
+plt.xticks(rotation=45)
+plt.show()
+
+
+P6
+
+Import nltk
+from nltk.util import ngrams
+sentence = "NLP is interesting and powerful for text applications"
+tokens = sentence.split()
+bigrams = list(ngrams(tokens, 2))
+trigrams = list(ngrams(tokens, 3))
+print("Bigrams:", bigrams)
+print("Trigrams:", trigrams)
+
+
+P7
+
+!pip install pandas
+import numpy as np
+import pandas as pd
+text = "NLP makes it easy to analyze text using NLP tools"
+words = list(set(text.split()))
+matrix = pd.DataFrame(0, index=words, columns=words)
+tokens = text.split()
+for i, w in enumerate(tokens):
+    for j in range(len(tokens)):
+        if i != j:
+            matrix.loc[w, tokens[j]] += 1
+print(matrix)
+
+
+P8
+
+import spacy
+nlp = spacy.load("en_core_web_sm")
+doc = nlp("The quick brown fox jumps over the lazy dog")
+for np in doc.noun_chunks:
+    print(np.text)
 
