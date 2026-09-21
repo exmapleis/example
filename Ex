@@ -1,102 +1,136 @@
-P! CODE: 1
-!pip install pypdf2
-import PyPDF2
-import requests
-from bs4 import BeautifulSoup
-pdf_path = "/content/1.pdf"
-reader = PyPDF2.PdfReader(pdf_path)
-pdf_text = ""
-for page in reader.pages:
-    pdf_text += page.extract_text()
-    print("PDF Text:\n", pdf_text)
+P6:
+#include <stdio.h> 
+int main() { 
+    int bt[20], p[20], wt[20], tat[20]; 
+    int n, i, j, temp; 
+    printf("Enter number of processes: "); 
+    scanf("%d", &n); 
+    for(i = 0; i < n; i++) { 
+        p[i] = i + 1; 
+        printf("Burst Time P%d: ", i + 1); 
+        scanf("%d", &bt[i]); 
+    } 
+     for(i = 0; i < n - 1; i++) 
+        for(j = i + 1; j < n; j++) 
+            if(bt[i] > bt[j]) { 
+                temp = bt[i]; 
+                bt[i] = bt[j]; 
+                bt[j] = temp; 
+                temp = p[i]; 
+                p[i] = p[j]; 
+               p[j] = temp; 
+            } 
+    wt[0] = 0; 
+    for(i = 1; i < n; i++) 
+        wt[i] = wt[i - 1] + bt[i - 1]; 
+    for(i = 0; i < n; i++) 
+        tat[i] = wt[i] + bt[i]; 
+    printf("\nP\tBT\tWT\tTAT\n"); 
+    for(i = 0; i < n; i++) 
+        printf("P%d\t%d\t%d\t%d\n", p[i], bt[i], wt[i], tat[i]); 
+    return 0; 
+} 
 
 
-P1 CODE:2
-url = "https://example.com"
-html = requests.get(url).text
-soup = BeautifulSoup(html, "html.parser")
-print("HTML Text:\n", soup.get_text())
+
+p7:
+#include <stdio.h> 
+int main() { 
+    int alloc[10], req[10], avail[10]; 
+    int n, i; 
+    printf("Enter number of processes: "); 
+    scanf("%d", &n); 
+    printf("Enter Allocation:\n"); 
+    for(i = 0; i < n; i++) 
+        scanf("%d", &alloc[i]); 
+    printf("Enter Request:\n"); 
+    for(i = 0; i < n; i++) 
+       scanf("%d", &req[i]); 
+    printf("Enter Available Resource: "); 
+    scanf("%d", &avail[0]); 
+    for(i = 0; i < n; i++) { 
+        if(req[i] > avail[0]) { 
+            printf("Deadlock Detected\n"); 
+
+            return 0; 
+        } 
+        avail[0] += alloc[i]; 
+    } 
+    printf("No Deadlock\n"); 
+    return 0; 
+} 
 
 
 
-P2
-import requests
-from bs4 import BeautifulSoup
-url = &quot;https://en.wikipedia.org/wiki/Web_scraping&quot;
-response = requests.get(url)
-soup = BeautifulSoup(response.text, &#39;html.parser&#39;)
-content = soup.find(&#39;div&#39;, {&#39;class&#39;: &#39;mw-parser-output&#39;})
-paragraphs = content.find_all(&#39;p&#39;)
-for p in paragraphs:
-text = p.get_text(strip=True)
-if text:
-print(text)
+P8:
+#include <stdio.h> 
+int main() { 
+    int total, allocated; 
+    printf("Enter total devices: "); 
+    scanf("%d", &total); 
+    printf("Enter devices to allocate: "); 
+   scanf("%d", &allocated); 
+    if(allocated <= total) { 
+        total -= allocated; 
+        printf("Allocated Successfully\n"); 
+        printf("Available Devices = %d\n", total); 
+        printf("Deallocating...\n"); 
+        total += allocated; 
+        printf("Available Devices = %d\n", total); 
+    } 
+    else 
+       printf("Allocation Failed\n"); 
+    return 0; 
+} 
 
 
 
-P3
-
-text = &quot;NLP is fun and AI is cool&quot;
-lookup = {&quot;NLP&quot;: &quot;Natural Language Processing&quot;, &quot;AI&quot;: &quot;Artificial Intelligence&quot;}
-short_words = [w for w in text.split() if len(w) &lt;= 3]
-print(&quot;Lookup:&quot;, {w: lookup.get(w, &quot;Not found&quot;) for w in text.split()})
-print(&quot;Short words:&quot;, short_words)
+p9:
 
 
-P4
-
-from textblob import TextBlob
-a= input("Enter a sentence with spelling mistakes: ")
-blob = TextBlob(a)
-corrected_text = blob.correct()
-print("\nCorrected Sentence:")
-print(corrected_text)
-
-
-P5
-
-import matplotlib.pyplot as plt
-text = "Natural language processing enables computers to understand text"
-words = text.split()
-long_words = [w for w in words if len(w) > 5]
-plt.bar(long_words, [len(w) for w in long_words])
-plt.xticks(rotation=45)
-plt.show()
+#include <stdio.h> 
+int main() { 
+    int n, i, start; 
+    printf("Enter number of blocks: "); 
+   scanf("%d", &n); 
+    printf("Enter starting block: "); 
+   scanf("%d", &start); 
+    printf("Linked Allocation:\n"); 
+    for(i = 0; i < n; i++) 
+       printf("%d -> ", start + i); 
+    printf("NULL\n"); 
+    return 0; 
+} 
 
 
-P6
 
-Import nltk
-from nltk.util import ngrams
-sentence = "NLP is interesting and powerful for text applications"
-tokens = sentence.split()
-bigrams = list(ngrams(tokens, 2))
-trigrams = list(ngrams(tokens, 3))
-print("Bigrams:", bigrams)
-print("Trigrams:", trigrams)
+p10:
+#include <stdio.h> 
+#include <stdlib.h> 
+struct Employee { 
 
-
-P7
-
-!pip install pandas
-import numpy as np
-import pandas as pd
-text = "NLP makes it easy to analyze text using NLP tools"
-words = list(set(text.split()))
-matrix = pd.DataFrame(0, index=words, columns=words)
-tokens = text.split()
-for i, w in enumerate(tokens):
-    for j in range(len(tokens)):
-        if i != j:
-            matrix.loc[w, tokens[j]] += 1
-print(matrix)
-
-
-P8
-
-import spacy
-nlp = spacy.load("en_core_web_sm")
-doc = nlp("The quick brown fox jumps over the lazy dog")
-for np in doc.noun_chunks:
-    print(np.text)
-
+    int id; 
+    char name[30]; 
+    float salary; 
+}; 
+int main() { 
+    FILE *fp; 
+    struct Employee e; 
+    fp = fopen("employee.dat", "wb+"); 
+    printf("Enter Employee ID: "); 
+   scanf("%d", &e.id); 
+    printf("Enter Name: "); 
+    scanf("%s", e.name); 
+    printf("Enter Salary: "); 
+   scanf("%f", &e.salary); 
+    fwrite(&e, sizeof(e), 1, fp); 
+    rewind(fp); 
+    fread(&e, sizeof(e), 1, fp); 
+    printf("\nEmployee Details\n"); 
+    printf("ID : %d\n", e.id); 
+    printf("Name : %s\n", e.name); 
+    printf("Salary : %.2f\n", e.salary); 
+    fclose(fp); 
+    return 0; 
+} 
+ 
