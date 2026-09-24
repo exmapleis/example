@@ -1,4 +1,4 @@
-p7:
+
 #include <stdio.h> 
 int main() { 
     int alloc[10], req[10], avail[10]; 
