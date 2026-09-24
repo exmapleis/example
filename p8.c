@@ -1,4 +1,4 @@
-P8:
+
 #include <stdio.h> 
 int main() { 
     int total, allocated; 
