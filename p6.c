@@ -1,4 +1,4 @@
-P6:
+
 #include <stdio.h> 
 int main() { 
     int bt[20], p[20], wt[20], tat[20]; 
